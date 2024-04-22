@@ -1,7 +1,6 @@
 import numpy as np
 import os
-from naive_bayes import *
-
+from models import *
 
 project_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 data_path = os.path.join(project_dir, "data", "rp.data")
@@ -10,16 +9,24 @@ test_path = os.path.join(project_dir, "data", "test.data")
 
 training = np.loadtxt(training_path)
 test = np.loadtxt(test_path)
-model,y_prob = naive_bayes(training)
 
 
-success=0
-fail=0
-for i in test:
-    if predict(model,y_prob,i[:-1])==i[-1]:
-        success+=1
-    else: 
-        fail+=1
-print(success/(success+fail))
 
-#print(predict(model,y_prob,np.array([0,0,0,0,1,0,1,0,0])))
+
+trainingX=training[:,:-1]
+trainingY=training[:,-1]
+testX=test[:,:-1]
+testY=test[:,-1]
+bayes=Naive_bayes(10,9,2)
+bayes.train(trainingX,trainingY)
+print(bayes.evaluate(testX,testY))
+
+
+trainingX=np.insert(trainingX,0,1,axis=1)
+testX=np.insert(testX,0,1,axis=1)
+log_reg=Log_Reg(10)
+log_reg.train(trainingX,trainingY)
+print(log_reg.evaluate(testX,testY))
+
+
+

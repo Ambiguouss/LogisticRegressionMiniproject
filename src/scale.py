@@ -7,3 +7,9 @@ def scale(input):
     input[:,-1]-=1
     input[:,-1]/=2
     return input
+
+#scale Y from {1,0} to {4,2}
+def inv_scale(result):
+    result*=2
+    result+=2
+    return result
