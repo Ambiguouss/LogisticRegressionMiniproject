@@ -16,13 +16,13 @@ class Naive_bayes(Model):
     
     def train(self,trainingX,trainingY):
         for i in range(self.y_values):
-            self.y_prob[i]=np.sum(trainingY==i)/trainingY.shape[0]
+            self.y_prob[i]=(1+np.sum(trainingY==i))/(2+trainingY.shape[0])
         for i in range(self.x_values):
             for j in range(self.features):
                 for k in range(self.y_values):
                     self.result[i][j][k]=(
-                        np.sum((trainingX[:,j]==i)
-                           &(trainingY==k))/self.y_prob[k])
+                        (1+np.sum((trainingX[:,j]==i)
+                           &(trainingY==k)))/(2+self.y_prob[k]))
     
     def predict(self,test):
         probability = self.y_prob[1]
