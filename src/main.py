@@ -22,9 +22,7 @@ bayes.train(trainingX,trainingY)
 print(bayes.evaluate(testX,testY))
 
 
-trainingX=np.insert(trainingX,0,1,axis=1)
-testX=np.insert(testX,0,1,axis=1)
-log_reg=Log_Reg(10)
+log_reg=Log_Reg(9)
 log_reg.train(trainingX,trainingY)
 print(log_reg.evaluate(testX,testY))
 

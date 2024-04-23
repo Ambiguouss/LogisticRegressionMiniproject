@@ -37,14 +37,16 @@ class Naive_bayes(Model):
 
 class Log_Reg(Model):
     def __init__(self,features):
-        self.features=features
-        self.theta=np.zeros((features))
+        self.features=features+1
+        self.theta=np.zeros((self.features))
 
-    def train(self,trainingX,trainingY,step=0.1,iterations=100000):
+    def train(self,trainingX,trainingY,step=0.1,iterations=10000):
+        trainingX=np.insert(trainingX,0,1,axis=1)
         for _ in range(iterations):
             a=(trainingY-(1.0/(1.0+np.exp(trainingX@(-self.theta)))))
             gradient = (np.transpose(trainingX)@a)
             self.theta += step*gradient
     
     def predict(self,test):
+        test=np.insert(test,0,1)
         return (int)(1.0/(1+np.exp(test@(-self.theta))))>0.5
