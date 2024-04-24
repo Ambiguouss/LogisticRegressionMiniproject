@@ -17,14 +17,16 @@ trainingX=training[:,:-1]
 trainingY=training[:,-1]
 testX=test[:,:-1]
 testY=test[:,-1]
+
+
 bayes=Naive_bayes(10,9,2)
 bayes.train(trainingX,trainingY)
-print(bayes.evaluate(testX,testY))
-
-
 log_reg=Log_Reg(9)
 log_reg.train(trainingX,trainingY)
-print(log_reg.evaluate(testX,testY))
 
 
+print(bayes.accuracy(testX,testY))
+print(log_reg.accuracy(testX,testY))
 
+print(bayes.F_beta(testX,testY))
+print(log_reg.F_beta(testX,testY))
